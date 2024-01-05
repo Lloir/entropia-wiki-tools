@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+    <title>Upload Avatar Statistics</title>
+    <link rel="stylesheet" type="text/css" href="styles/">
+</head>
+<body>
+
+<h1>Tools: Upload Avatar Statistics</h1>
+<p>Entropia wiki supports the following tool to upload your skills:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Functions</th>
+        <th>Supported formats</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Skill Scanner</td>
+        <td>Skills</td>
+        <td>.csv</td>
+    </tr>
+    </tbody>
+</table>
+<p>This program is able to read in-game screenshots and generate a CSV file from it. It is also possible to create a csv file yourself. The .csv is formatted as following:</p>
+<p>skill/profession,0.00,type</p>
+<p>Type is optional, and can either have the value "skill" or "profession". Example: rifle,3245.8,skill<br/>To be able to upload your skills you need to have an account, and have your avatar linked on your account page.</p>
+<p id="notLoggedIn">Avatar: You are not logged in. <a href="/login">Click here</a> to login or create an account.</p>
+
+<form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <input type="submit" value="Login" />
+</form>
+
+<form name="avatarForm" method="post" action="/submitForm" enctype="multipart/form-data">
+    <!-- File Upload -->
+    <label for="avatarFile">Upload CSV:</label>
+    <input type="file" id="avatarFile" name="avatarFile" accept=".csv"><br/>
+
+    <label>Add skills with more than: </label>
+    <input type="number" name="skillLevels"/><br/>
+
+    <input type="checkbox" id="setHealth" name="userOptions">
+    <label for="setHealth">Set Health</label><br>
+
+    <input type="checkbox" id="setHighestSkill" name="userOptions">
+    <label for="setHighestSkill">Set Highest skill</label><br>
+
+    <input type="checkbox" id="setTotalSkills" name="userOptions">
+    <label for="setTotalSkills">Set Total skills</label><br>
+
+    <input type="checkbox" id="uploadSkills" name="userOptions">
+    <label for="uploadSkills">Upload skills</label><br>
+
+    <input type="checkbox" id="uploadProfessions" name="userOptions">
+    <label for="uploadProfessions">Upload professions</label><br>
+
+    <input type="submit" value="Submit">
+    <p>Note: When selecting professions, the professions must be available in the CSV file. They are not automatically calculated from the skills.</p>
+</form>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        fetch('https://your-mediawiki-site.com/w/api.php?action=login&lgname=' + username + '&lgpassword=' + password + '&format=json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            credentials: 'include',
+        }).then(function(response) {
+            if (!response.ok) {
+                throw new Error("HTTP error, status = " + response.status);
+            }
+            return response.json();
+        }).then(function(json) {
+            console.log(json);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+</script>
+
+</body>
+</html>
