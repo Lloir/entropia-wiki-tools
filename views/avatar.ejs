@@ -1,0 +1,15 @@
+<h1>Avatar Professions and Skills</h1>
+
+<h2>Professions</h2>
+<ul>
+    <% for(let profession of data.professions) { %>
+        <li><%= profession.profession %> - <%= profession.category %> - <%= profession.value %> </li>
+    <% } %>
+</ul>
+
+<h2>Skills</h2>
+<ul>
+    <% for(let skill of data.skills) { %>
+        <li><%= skill.skill %> - <%= skill.category %> - <%= skill.value %> </li>
+    <% } %>
+</ul>
