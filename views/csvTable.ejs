@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <title>CSV Data</title>
     <style>
@@ -10,19 +10,65 @@
 </head>
 <body>
 <h1>CSV Data</h1>
-<!-- Display the total value of the "skill" from the CSV file -->
-<p>skill/profession,<%= skillSum.toFixed(2) %>,type</p>
+<h2>Professions</h2>
+
 <table>
-    <% if (rows.length > 0) { %>
+    <% if (professions.length > 0) { %>
+    <tr>
+        <% for (let key in professions[0]) { %>
+            <th><%= key %></th>
+        <% } %>
+    </tr>
+        <% professions.forEach(profession => { %>
+            <tr>
+                <% for (let key in profession) { %>
+                    <td><%= profession[key] %></td>
+                <% } %>
+            </tr>
+        <% }) %>
+    <% } else { %>
         <tr>
-            <% for (let key in rows[0]) { %>
+            <td>No data</td>
+        </tr>
+    <% } %>
+</table>
+
+<h2>Skills</h2>
+
+<table>
+    <% if (skills.length > 0) { %>
+        <tr>
+            <% for (let key in skills[0]) { %>
                 <th><%= key %></th>
             <% } %>
         </tr>
-        <% rows.forEach(row => { %>
+        <% professions.forEach(profession => { %>
             <tr>
-                <% for (let key in row) { %>
-                    <td><%= row[key] %></td>
+                <% for (let key in profession) { %>
+                    <td><%= profession[key] %></td>
+                <% } %>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td>No data</td>
+        </tr>
+    <% } %>
+</table>
+
+<h2>Skills</h2>
+
+<table>
+    <% if (skills.length > 0) { %>
+        <tr>
+            <% for (let key in skills[0]) { %>
+                <th><%= key %></th>
+            <% } %>
+        </tr>
+        <% skills.forEach(skill => { %>
+            <tr>
+                <% for (let key in skill) { %>
+                    <td><%= skill[key] %></td>
                 <% } %>
             </tr>
         <% }) %>
