@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Data</title>
+    <style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; }
+        th { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+<h1>CSV Data</h1>
+<!-- Display the total value of the "skill" from the CSV file -->
+<p>skill/profession,<%= skillSum.toFixed(2) %>,type</p>
+<table>
+    <% if (rows.length > 0) { %>
+        <tr>
+            <% for (let key in rows[0]) { %>
+                <th><%= key %></th>
+            <% } %>
+        </tr>
+        <% rows.forEach(row => { %>
+            <tr>
+                <% for (let key in row) { %>
+                    <td><%= row[key] %></td>
+                <% } %>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td>No data</td>
+        </tr>
+    <% } %>
+</table>
+</body>
+</html>
